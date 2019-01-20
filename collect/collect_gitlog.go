@@ -7,6 +7,7 @@ import (
 	"net/http"
 		"time"
 	"sort"
+	"github.com/Ryu955/shintyoku/setting"
 )
 
 type GitLog []struct {
@@ -93,7 +94,7 @@ func GetGitLog(repo_name string) List{
 	// url := "https://api.github.com/repos/hillive/201801_GraduationThesis_ryutai/commits"
 	//url := "https://api.github.com/repos/ryu955/dotfiles/commits"
 
-	api_key := GetApiKey()
+	api_key := setting.GetApiKey()
 
 	req, _ := http.NewRequest("GET", url, nil)
 	req.Header.Add("Authorization", api_key)

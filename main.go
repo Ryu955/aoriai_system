@@ -7,7 +7,10 @@ import (
 )
 
 func main() {
-	setting.GetRepoName()
-	a := collect.GetGitLog("201801_GraduationThesis_ryutai")
-	fmt.Println(a)
+	repos := setting.GetRepoName()
+
+	for _, repo := range repos {
+		fmt.Println(repo)
+		fmt.Println(collect.GetGitLog(repo))
+	}
 }

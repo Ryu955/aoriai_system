@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func GetRepoName() {
+func GetRepoName() []string {
 	// https://api.github.com/search/repositories?q=ryutai+org:hillive&type=Repositories
 	data, err := ioutil.ReadFile("./repos.csv")
 	if err != nil {
@@ -45,8 +45,10 @@ func GetRepoName() {
 		fmt.Println("error:", err)
 	}
 
+	var repos []string
 	for _, item := range rs.Items {
-		fmt.Println(item.Name)
-
+		//fmt.Println(item.Name)
+		repos = append(repos, item.Name)
 	}
+	return repos
 }

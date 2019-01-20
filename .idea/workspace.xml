@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f0b5a1e1-6f4e-43c1-919b-32a55e3d778e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/collect/apikey.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/collect/collect_gitlog.go" beforeDir="false" afterPath="$PROJECT_DIR$/collect/collect_gitlog.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,12 +32,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="go" value="1399" />
+          <entry key="go" value="2296" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Go" value="1399" />
+          <entry key="Go" value="2296" />
         </counts>
       </usages-collector>
     </session>
@@ -56,16 +53,16 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/collect/collect_gitlog.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="445">
-              <caret line="121" column="22" selection-start-line="121" selection-start-column="22" selection-end-line="121" selection-end-column="22" />
+            <state relative-caret-position="483">
+              <caret line="155" selection-start-line="155" selection-end-line="155" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/collect/apikey.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="90">
@@ -99,8 +96,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/main.go" />
-        <option value="$PROJECT_DIR$/collect/collect_gitlog.go" />
         <option value="$PROJECT_DIR$/collect/apikey.go" />
+        <option value="$PROJECT_DIR$/collect/collect_gitlog.go" />
       </list>
     </option>
   </component>
@@ -218,6 +215,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/collect/collect_gitlog.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="155" selection-start-line="155" selection-end-line="155" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/collect/apikey.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -225,13 +229,6 @@
           <folding>
             <element signature="e#17#51#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/collect/collect_gitlog.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="445">
-          <caret line="121" column="22" selection-start-line="121" selection-start-column="22" selection-end-line="121" selection-end-column="22" />
         </state>
       </provider>
     </entry>

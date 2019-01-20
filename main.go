@@ -1,8 +1,11 @@
 package main
 
-import "./collect"
+import (
+	"./collect"
+	"fmt"
+)
 
 func main() {
-	collect.GetGitLog("201801_GraduationThesis_ryutai")
-
+	a := collect.GetGitLog("201801_GraduationThesis_ryutai")
+	fmt.Print(a)
 }

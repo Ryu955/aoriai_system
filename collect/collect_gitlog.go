@@ -87,14 +87,13 @@ type GitLog []struct {
 	} `json:"parents"`
 }
 
-func GetGitLog(repo_name string) {
+func GetGitLog(repo_name string) List{
 
 	url := "https://api.github.com/repos/hillive/" + repo_name + "/commits"
 	// url := "https://api.github.com/repos/hillive/201801_GraduationThesis_ryutai/commits"
 	//url := "https://api.github.com/repos/ryu955/dotfiles/commits"
 
 	api_key := GetApiKey()
-	fmt.Println(api_key)
 
 	req, _ := http.NewRequest("GET", url, nil)
 	req.Header.Add("Authorization", api_key)
@@ -110,16 +109,13 @@ func GetGitLog(repo_name string) {
 	err := json.Unmarshal(bytes, &gl)
 	if err != nil {
 		fmt.Println("error:", err)
-		return
 	}
 
 	// commit_map := make(map[string]int)
 	commit_map := make(map[string]int)
 	jst, _ := time.LoadLocation("Asia/Tokyo")
-	for count, log := range gl {
-		fmt.Println(count)
+	for _, log := range gl {
 		commit_date := log.Commit.Author.Date.In(jst).Format("2006-01-02")
-		fmt.Println(commit_date)
 
 		_, is_exist	:= commit_map[commit_date]
 		if is_exist {
@@ -130,35 +126,13 @@ func GetGitLog(repo_name string) {
 	}
 
 
-	fmt.Println(commit_map)
 
-	a := List{}
+	sorted_log := List{}
 	for k, v := range commit_map {
-		e := Entry{k, v}
-		a = append(a, e)
+		e := Log{k, v}
+		sorted_log = append(sorted_log, e)
 	}
 
-	sort.Sort(a)
-	fmt.Println(a)
-}
-type Entry struct {
-	name  string
-	value int
-}
-type List []Entry
-
-func (l List) Len() int {
-	return len(l)
-}
-
-func (l List) Swap(i, j int) {
-	l[i], l[j] = l[j], l[i]
-}
-
-func (l List) Less(i, j int) bool {
-	if l[i].value == l[j].value {
-		return (l[i].name < l[j].name)
-	} else {
-		return (l[i].value < l[j].value)
-	}
+	sort.Sort(sorted_log)
+	return sorted_log
 }

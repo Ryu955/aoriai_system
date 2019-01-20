@@ -13,4 +13,6 @@ func main() {
 		fmt.Println(repo)
 		fmt.Println(collect.GetGitLog(repo))
 	}
+	//a := collect.GetGitLog("201801_GraduationThesis_ryutai")
+	//fmt.Println(a)
 }

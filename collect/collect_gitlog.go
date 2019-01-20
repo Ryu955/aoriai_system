@@ -3,11 +3,11 @@ package collect
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/Ryu955/shintyoku/setting"
 	"io/ioutil"
 	"net/http"
-		"time"
 	"sort"
-	"github.com/Ryu955/shintyoku/setting"
+	"time"
 )
 
 type GitLog []struct {
@@ -88,10 +88,11 @@ type GitLog []struct {
 	} `json:"parents"`
 }
 
-func GetGitLog(repo_name string) List{
+func GetGitLog(repo_name string) List {
 
-	url := "https://api.github.com/repos/hillive/" + repo_name + "/commits"
+	url := "https://api.github.com/repos/hillive/" + repo_name + "/commits?per_page=100"
 	// url := "https://api.github.com/repos/hillive/201801_GraduationThesis_ryutai/commits"
+
 	//url := "https://api.github.com/repos/ryu955/dotfiles/commits"
 
 	api_key := setting.GetApiKey()
@@ -117,7 +118,7 @@ func GetGitLog(repo_name string) List{
 	jst, _ := time.LoadLocation("Asia/Tokyo")
 	for _, log := range gl {
 		commit_date := log.Commit.Author.Date.In(jst).Format("2006-01-02")
-		_, is_exist	:= commit_map[commit_date]
+		_, is_exist := commit_map[commit_date]
 		if is_exist {
 			commit_map[commit_date] = commit_map[commit_date] + 1
 		} else {
@@ -125,7 +126,7 @@ func GetGitLog(repo_name string) List{
 		}
 	}
 
-
+	fmt.Println(commit_map)
 
 	sorted_log := List{}
 	for k, v := range commit_map {

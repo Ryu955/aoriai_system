@@ -6,8 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 		"time"
-	"strings"
-)
+	)
 
 type GitLog []struct {
 	Sha    string `json:"sha"`
@@ -87,9 +86,10 @@ type GitLog []struct {
 	} `json:"parents"`
 }
 
-func GetGitLog() {
+func GetGitLog(repo_name string) {
 
-	url := "https://api.github.com/repos/hillive/201801_GraduationThesis_ryutai/commits"
+	url := "https://api.github.com/repos/hillive/" + repo_name + "/commits"
+	// url := "https://api.github.com/repos/hillive/201801_GraduationThesis_ryutai/commits"
 	//url := "https://api.github.com/repos/ryu955/dotfiles/commits"
 
 	api_key := GetApiKey()
@@ -112,26 +112,13 @@ func GetGitLog() {
 		return
 	}
 
-	//fmt.Println(gl[0].Commit.Author.Date)
+	jst, _ := time.LoadLocation("Asia/Tokyo")
 
 	for count, log := range gl {
 		fmt.Println(count)
-		fmt.Println(log.Commit.Author.Date)
+		commit_date := log.Commit.Author.Date.In(jst).Format("2006-01-02")
+		fmt.Println(commit_date)
 	}
-
 	// fmt.Println(string(body))
-
 }
 
-func GetApiKey() string {
-
-	data, err := ioutil.ReadFile("./.env")
-	if err != nil {
-		// エラー処理
-		fmt.Println("don't read file")
-		panic(err)
-	}
-
-	api_key := "token " +strings.TrimRight(string(data), "\n")
-	return api_key
-}

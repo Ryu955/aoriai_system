@@ -3,5 +3,6 @@ package main
 import "./collect"
 
 func main() {
-	collect.GetGitLog()
+	collect.GetGitLog("201801_GraduationThesis_ryutai")
+
 }

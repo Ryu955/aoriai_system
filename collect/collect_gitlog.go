@@ -131,10 +131,12 @@ func GetGitLog(repo_name string) List {
 	//url := "https://api.github.com/repos/ryu955/dotfiles/commits"
 
 	gl := GetCommitLog(url)
-	fmt.Println(len(gl))
 
 	commit_map := make(map[string]int)
 	JsonToStruct(commit_map, gl)
+
+	//fmt.Println(len(commit_map))
+	// fmt.Println(commit_map)
 
 	if len(gl) == 100 {
 		url = "https://api.github.com/repos/hillive/" + repo_name + "/commits?per_page=100&page=2"
@@ -142,6 +144,16 @@ func GetGitLog(repo_name string) List {
 		//	fmt.Println(len(gl2))
 		JsonToStruct(commit_map, gl2)
 	}
+	//fmt.Println(commit_map)
+	//fmt.Println(len(commit_map))
+
+	var count int
+	for _, v := range commit_map {
+		count = count + v
+	}
+
+	fmt.Print("総コミット回数：")
+	fmt.Println(count)
 
 	sorted_log := List{}
 	for k, v := range commit_map {

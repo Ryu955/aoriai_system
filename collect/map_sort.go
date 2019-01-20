@@ -1,7 +1,7 @@
 package collect
 
 type Log struct {
-	date string
+	date  string
 	value int
 }
 type List []Log
@@ -15,9 +15,9 @@ func (l List) Swap(i, j int) {
 }
 
 func (l List) Less(i, j int) bool {
-	if l[i].value == l[j].value {
-		return (l[i].date< l[j].date)
-	} else {
+	if l[i].date == l[j].date {
 		return (l[i].value < l[j].value)
+	} else {
+		return (l[i].date < l[j].date)
 	}
 }

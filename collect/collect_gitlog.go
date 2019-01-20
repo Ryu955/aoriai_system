@@ -117,7 +117,6 @@ func GetGitLog(repo_name string) List{
 	jst, _ := time.LoadLocation("Asia/Tokyo")
 	for _, log := range gl {
 		commit_date := log.Commit.Author.Date.In(jst).Format("2006-01-02")
-
 		_, is_exist	:= commit_map[commit_date]
 		if is_exist {
 			commit_map[commit_date] = commit_map[commit_date] + 1

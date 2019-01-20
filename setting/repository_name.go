@@ -1,10 +1,11 @@
 package setting
 
 import (
-	"io/ioutil"
-			"strings"
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"net/http"
+	"strings"
 )
 
 func GetRepoName() {
@@ -23,7 +24,7 @@ func GetRepoName() {
 	q := split_data[0] + "_" + split_data[1]
 
 	// url := "https://api.github.com/search/repositories?q=ryutai+org:hillive&type=Repositories"
-	url := "https://api.github.com/search/repositories?q="+q+"+org:hillive&type=Repositories"
+	url := "https://api.github.com/search/repositories?q=" + q + "+org:hillive&type=Repositories"
 
 	api_key := GetApiKey()
 
@@ -36,5 +37,16 @@ func GetRepoName() {
 	body, _ := ioutil.ReadAll(res.Body)
 
 	bytes := ([]byte)(body)
-	fmt.Println(string(bytes))
+	// fmt.Println(string(bytes))
+
+	var rs RepoSearch
+	err = json.Unmarshal(bytes, &rs)
+	if err != nil {
+		fmt.Println("error:", err)
+	}
+
+	for _, item := range rs.Items {
+		fmt.Println(item.Name)
+
+	}
 }

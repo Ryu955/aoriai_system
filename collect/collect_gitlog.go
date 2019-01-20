@@ -88,13 +88,7 @@ type GitLog []struct {
 	} `json:"parents"`
 }
 
-func GetGitLog(repo_name string) List {
-
-	url := "https://api.github.com/repos/hillive/" + repo_name + "/commits?per_page=100"
-	// url := "https://api.github.com/repos/hillive/201801_GraduationThesis_ryutai/commits"
-
-	//url := "https://api.github.com/repos/ryu955/dotfiles/commits"
-
+func GetCommitLog(url string) GitLog {
 	api_key := setting.GetApiKey()
 
 	req, _ := http.NewRequest("GET", url, nil)
@@ -112,9 +106,10 @@ func GetGitLog(repo_name string) List {
 	if err != nil {
 		fmt.Println("error:", err)
 	}
+	return gl
+}
 
-	// commit_map := make(map[string]int)
-	commit_map := make(map[string]int)
+func JsonToStruct(commit_map map[string]int, gl GitLog) {
 	jst, _ := time.LoadLocation("Asia/Tokyo")
 	for _, log := range gl {
 		commit_date := log.Commit.Author.Date.In(jst).Format("2006-01-02")
@@ -125,8 +120,28 @@ func GetGitLog(repo_name string) List {
 			commit_map[commit_date] = 1
 		}
 	}
+}
 
-	fmt.Println(commit_map)
+func GetGitLog(repo_name string) List {
+
+	//url := "https://api.github.com/repos/hillive/" + repo_name + "/commits?per_page=100&page=2"
+	url := "https://api.github.com/repos/hillive/" + repo_name + "/commits?per_page=100"
+	// https://developer.github.com/v3/#pagination
+	// url := "https://api.github.com/repos/hillive/201801_GraduationThesis_ryutai/commits"
+	//url := "https://api.github.com/repos/ryu955/dotfiles/commits"
+
+	gl := GetCommitLog(url)
+	fmt.Println(len(gl))
+
+	commit_map := make(map[string]int)
+	JsonToStruct(commit_map, gl)
+
+	if len(gl) == 100 {
+		url = "https://api.github.com/repos/hillive/" + repo_name + "/commits?per_page=100&page=2"
+		gl2 := GetCommitLog(url)
+		//	fmt.Println(len(gl2))
+		JsonToStruct(commit_map, gl2)
+	}
 
 	sorted_log := List{}
 	for k, v := range commit_map {

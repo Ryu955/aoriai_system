@@ -17,12 +17,12 @@ type GitLog []struct {
 		Author struct {
 			Name  string    `json:"name"`
 			Email string    `json:"email"`
-			Date  time.Time `json:"date"`
+			Date  time.Time `json:"Date"`
 		} `json:"author"`
 		Committer struct {
 			Name  string    `json:"name"`
 			Email string    `json:"email"`
-			Date  time.Time `json:"date"`
+			Date  time.Time `json:"Date"`
 		} `json:"committer"`
 		Message string `json:"message"`
 		Tree    struct {
@@ -109,6 +109,11 @@ func GetCommitLog(url string) GitLog {
 	return gl
 }
 
+type Output struct {
+	name string
+	log  List
+}
+
 func JsonToStruct(commit_map map[string]int, gl GitLog) {
 	jst, _ := time.LoadLocation("Asia/Tokyo")
 	for _, log := range gl {
@@ -147,13 +152,13 @@ func GetGitLog(repo_name string) List {
 	//fmt.Println(commit_map)
 	//fmt.Println(len(commit_map))
 
-	var count int
-	for _, v := range commit_map {
-		count = count + v
-	}
-
-	fmt.Print("総コミット回数：")
-	fmt.Println(count)
+	//var count int
+	//for _, v := range commit_map {
+	//	count = count + v
+	//}
+	//
+	//fmt.Print("総コミット回数：")
+	//fmt.Println(count)
 
 	sorted_log := List{}
 	for k, v := range commit_map {
@@ -162,5 +167,12 @@ func GetGitLog(repo_name string) List {
 	}
 
 	sort.Sort(sorted_log)
+
+	//output := List{Output{repo_name}}
+	//output := List{}
+	//output = append(output,Output{repo_name,sorted_log})
+	//output := Output{repo_name, sorted_log}
+	//fmt.Println(output)
+
 	return sorted_log
 }
